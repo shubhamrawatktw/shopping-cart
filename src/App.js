@@ -1,35 +1,41 @@
 import React from "react";
 import Cart from "./Cart";
 import Navbar from "./Navbar";
-
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/firestore';
+import {db} from "./firebase"
 class App extends React.Component {
   constructor() {
     super();
+  
     this.state = {
-      products: [
-        {
-          price: 99,
-          title: "watch",
-          qty: 10,
-          img: "",
-          id: 1,
-        },
-        {
-          price: 999,
-          title: "phone",
-          qty: 4,
-          img: "",
-          id: 2,
-        },
-        {
-          price: 999,
-          title: "laptop",
-          qty: 1,
-          img: "",
-          id: 3,
-        },
-      ],
+      products: [],
+      loading:true
     };
+  }
+
+  componentDidMount (){
+
+    db.collection("products")
+    .get()
+    .then((snapshot)=>{
+      // console.log(snapshot.docs);
+      snapshot.docs.map((doc)=>{
+        // console.log(doc.data());
+      })
+
+      const products = snapshot.docs.map((doc)=>{
+        // console.log(doc);
+        const data = doc.data()
+        data.id = doc.id
+        // console.log(data);
+        return data
+      })
+      this.setState({
+        products,
+        loading:false 
+      })
+    })
   }
 
   increaseQuantity = (product)=>{
@@ -55,6 +61,7 @@ decreaseQuantity = (product)=>{
     products[index].qty -= 1 
     this.setState({
         products
+        
     })
 }
 
@@ -86,7 +93,8 @@ getCartTotal = ()=>{
 }
 
   render() {
-    const { products } = this.state;
+   
+    const { products , loading} = this.state;
     return (
       <>
         <Navbar count = {this.getCartCount()}/>
@@ -96,7 +104,8 @@ getCartTotal = ()=>{
           handleDec = {this.decreaseQuantity}
           onDelete = {this.handleDeleteProduct}
         />
-
+        
+        {loading && <h1>Loading products...</h1>}
         <div style={{fontSize:20,padding:10}}>Total : {this.getCartTotal()}</div>
       </>
     );
