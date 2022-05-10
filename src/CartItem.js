@@ -1,46 +1,46 @@
 import React from "react";
 
-class CartItem extends React.Component {
-  render() {
-    // console.log(this.props);
-    const { price, title, qty } = this.props.product;
-    const {product,handleInc,handleDec,onDelete} = this.props
-    return (
-      <div className="cart-item">
-        <div className="left-block">
-          <img src="" alt="" style={styles.images} />
-        </div>
+const CartItem = (props) => {
+  // console.log(props);
+  const { price, title, qty } = props.product;
+  const { product, handleInc, handleDec, onDelete } = props;
+  return (
+    <div className="cart-item">
+      <div className="left-block">
+        <img src="" alt="" style={styles.images} />
+      </div>
 
-        <div className="right-block">
-          <div style={{ fontSize: 25 }}>{title}</div>
-          <div style={{ color: "#777" }}>{price}</div>
-          <div style={{ color: "#777" }}>{qty}</div>
-          <div className="cart-item-actions">
-            {/* buttons */}
-            <img
-              src="https://cdn-icons-png.flaticon.com/512/992/992651.png"
-              className="action-icons"
-              alt="increase"
-              onClick={() =>handleInc(product)}
-            />
-            <img
-              src="https://cdn-icons-png.flaticon.com/512/992/992683.png"
-              className="action-icons"
-              alt="decrease"
-              onClick={()=>handleDec(product)}
-            />
-            <img
-              src="https://cdn-icons-png.flaticon.com/512/1214/1214428.png"
-              className="action-icons"
-              alt="delete"
-              onClick={()=>{onDelete(product.id)}}
-            />
-          </div>
+      <div className="right-block">
+        <div style={{ fontSize: 25 }}>{title}</div>
+        <div style={{ color: "#777" }}>{price}</div>
+        <div style={{ color: "#777" }}>{qty}</div>
+        <div className="cart-item-actions">
+          {/* buttons */}
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/992/992651.png"
+            className="action-icons"
+            alt="increase"
+            onClick={() => handleInc(product)}
+          />
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/992/992683.png"
+            className="action-icons"
+            alt="decrease"
+            onClick={() => handleDec(product)}
+          />
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/1214/1214428.png"
+            className="action-icons"
+            alt="delete"
+            onClick={() => {
+              onDelete(product.id);
+            }}
+          />
         </div>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 const styles = {
   images: {
