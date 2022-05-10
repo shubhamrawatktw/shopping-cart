@@ -1,10 +1,12 @@
-
-
+import CartItem from "./CartItem"
 
 function App() {
   return (
-   <h1>cart</h1>
-  );
+    <>
+    <CartItem/>
+
+    </>
+  )
 }
 
 export default App;
