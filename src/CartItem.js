@@ -2,12 +2,12 @@ import React from "react";
 
 const CartItem = (props) => {
   // console.log(props);
-  const { price, title, qty } = props.product;
+  const { price, title, qty ,img} = props.product;
   const { product, handleInc, handleDec, onDelete } = props;
   return (
     <div className="cart-item">
       <div className="left-block">
-        <img src="" alt="" style={styles.images} />
+        <img src={img} alt="" style={styles.images} />
       </div>
 
       <div className="right-block">

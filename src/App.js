@@ -17,12 +17,11 @@ class App extends React.Component {
   componentDidMount (){
 
     db.collection("products")
-    .get()
-    .then((snapshot)=>{
-      // console.log(snapshot.docs);
-      snapshot.docs.map((doc)=>{
-        // console.log(doc.data());
-      })
+    .onSnapshot((snapshot)=>{
+      
+      // snapshot.docs.map((doc)=>{
+      //   // console.log(doc.data());
+      // })
 
       const products = snapshot.docs.map((doc)=>{
         // console.log(doc);
